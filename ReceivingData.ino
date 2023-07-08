@@ -33,12 +33,13 @@ void loop() {
   sensorValue*=100;                   // Multiplying by 100 to get a bigger range
 //  Serial.println(sensorValue);
   delay(100);
-  if(sensorValue > thres){              // Starts when first High value detected
+  if(sensorValue < thres){              // Starts when first High value detected
     lcd.setCursor(0,0);
     while(1){
       val = analogRead(sensorPin);
+      val = (1000*val)/(5-val);
       val *=100;
-      if(val > thres){
+      if(val < thres){
         data += '1';                  // Taking the binary input
         delay(100);
       } else{
